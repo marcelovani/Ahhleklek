@@ -39,10 +39,7 @@ $facebook = new Facebook(array(
   'sharedSession' => true,
   'trustForwarded' => true,
 ));
-
-$question = "Ta indo aonde?";
-$answer = "Na casa do " . he(idx($basic, 'name')) . "!";
-      
+ 
 $user_id = $facebook->getUser();
 if ($user_id) {
   try {
@@ -81,6 +78,8 @@ $app_info = $facebook->api('/'. AppInfo::appID());
 
 $app_name = idx($app_info, 'name', '');
 
+$question = "Ta indo aonde?";
+$answer = "Na casa do " . he(idx($basic, 'name')) . "!";
 ?>
 <!DOCTYPE html>
 <html xmlns:fb="http://ogp.me/ns/fb#" lang="en">
