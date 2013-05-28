@@ -230,9 +230,9 @@ $app_name = idx($app_info, 'name', '');
     </header>
 
     <section id="main">
-      <form>
-        <p>Question: <input type="text" name="question" size="30" max-size="20" value="<?php echo $question; ?>"></p>
-        <p>Answer: <input type="text" name="answer" size="30" max-size="30" value="<?php echo $answer; ?>"></p>
+      <form class="form" action="" method="POST">
+        <p>Question: <input type="text" class="question" name="question" size="30" max-size="20" value="<?php echo $question; ?>"></p>
+        <p>Answer: <input type="text" class="answer" name="answer" size="30" max-size="30" value="<?php echo $answer; ?>"></p>
       </form>
       <a href="https://devcenter.heroku.com/articles/facebook" target="_top" class="button">Preview</a>
       <div id="preview">
