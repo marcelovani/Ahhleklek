@@ -266,7 +266,7 @@ $app_name = idx($app_info, 'name', '');
     ?>
 
     <section id="samples" class="clearfix">
-      <h1>Examples of the Facebook Graph API</h1>
+      <h1>Fun</h1>
 
       <div class="list">
         <h3>Friends using this app</h3>
