@@ -121,6 +121,7 @@ header .tagline {
 
 .facebook-button .plus {
   background-position: 6px -17px;
+  padding: 5px;
 }
 
 .facebook-button .apprequests {
@@ -339,6 +340,7 @@ header .tagline {
 }
 
 #preview {
+  background: url("../images/leklek_empty.jpg");
   border: 1px solid #353d4f;
   height: 320px;
   width: 500px;
@@ -386,7 +388,7 @@ header .tagline {
 }
 
 #share-app {
-	margin: 0 auto;
+	margin: 10px auto;
 	width: 344px;
 	float: none!important;
 }

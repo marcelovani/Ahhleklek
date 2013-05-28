@@ -40,8 +40,8 @@ $facebook = new Facebook(array(
   'trustForwarded' => true,
 ));
 
-$question = "Ta indo aonde";
-$answer = "Na casa do caraio";
+$question = "Ta indo aonde?";
+$answer = "Na casa do caralho!";
       
 $user_id = $facebook->getUser();
 if ($user_id) {
