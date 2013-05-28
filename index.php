@@ -232,12 +232,13 @@ $app_name = idx($app_info, 'name', '');
 
     <section id="main">
       <form class="form" action="" method="POST">
-        <p>Question: <input type="text" class="question" name="question" size="30" max-size="20" value="<?php echo $question; ?>"></p>
-        <p>Answer: <input type="text" class="answer" name="answer" size="30" max-size="30" value="<?php echo $answer; ?>"></p>
+        <p>Question: <input type="text" class="question" name="question" size="30" maxlength="30" value="<?php echo $question; ?>"></p>
+        <p>Answer: <input type="text" class="answer" name="answer" size="30" maxlength="50" value="<?php echo $answer; ?>"></p>
         <a href="#" class="button preview">Preview</a>
       </form>
       
       <div id="preview">
+        <div class="censored"></div>
         <div class="question"><?php echo $question; ?></div>
         <div class="answer"><?php echo $answer; ?></div>
       </div>

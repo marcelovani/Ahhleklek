@@ -349,6 +349,14 @@ header .tagline {
   text-shadow: 0 1px 0 rgba(0, 0, 0, .29);
 }
 
+#preview .censored {
+  background: url("../images/censored.png");
+  height: 320px;
+  width: 500px;
+  margin: 0 auto;
+  z-index: 200;
+}
+
 #preview .question {
 	display: block;
 	position: relative;
@@ -374,7 +382,7 @@ header .tagline {
 	z-index: 100;
 	font-size: 17px;
 	color: black;
-	line-height: 16px;
+	line-height: 17px;
 	text-align: center;
 	vertical-align: middle;	
 }
