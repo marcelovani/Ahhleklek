@@ -231,8 +231,8 @@ $app_name = idx($app_info, 'name', '');
       <p>Message 2</p>
       <a href="https://devcenter.heroku.com/articles/facebook" target="_top" class="button">Preview</a>
       <div id="preview">
-        <div class="question"><div>
-        <div class="answer"><div>
+        <div class="question"></div>
+        <div class="answer"></div>
       </div>
     </section>
     
