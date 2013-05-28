@@ -233,7 +233,7 @@ $app_name = idx($app_info, 'name', '');
       <form class="form" action="" method="POST">
         <p>Question: <input type="text" class="question" name="question" size="30" max-size="20" value="<?php echo $question; ?>"></p>
         <p>Answer: <input type="text" class="answer" name="answer" size="30" max-size="30" value="<?php echo $answer; ?>"></p>
-        <a href="#" class="button">Preview</a>
+        <a href="#" class="button preview">Preview</a>
       </form>
       
       <div id="preview">

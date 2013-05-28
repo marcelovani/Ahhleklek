@@ -419,3 +419,11 @@ header .tagline {
 	text-align: center;
 	vertical-align: middle;	
 }
+
+.button .preview {
+	position: relative;
+	right: 10px;
+	float: left;
+	top: -40px;
+	left: 255px;
+}
