@@ -357,3 +357,15 @@ header .tagline {
 .clearfix {
   zoom: 1;
 }
+
+
+
+
+
+#preview {
+  background: url("../images/leklek_empty.jpg");
+  border: 1px solid #353d4f;
+  height: 320px;
+  text-align: center;
+  text-shadow: 0 1px 0 rgba(0, 0, 0, .29);
+}
