@@ -355,6 +355,7 @@ header .tagline {
   width: 500px;
   margin: 0 auto;
   z-index: 200;
+  position: absolute;
 }
 
 #preview .question {
