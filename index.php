@@ -233,8 +233,9 @@ $app_name = idx($app_info, 'name', '');
       <form class="form" action="" method="POST">
         <p>Question: <input type="text" class="question" name="question" size="30" max-size="20" value="<?php echo $question; ?>"></p>
         <p>Answer: <input type="text" class="answer" name="answer" size="30" max-size="30" value="<?php echo $answer; ?>"></p>
+        <a href="#" class="button">Preview</a>
       </form>
-      <a href="https://devcenter.heroku.com/articles/facebook" target="_top" class="button">Preview</a>
+      
       <div id="preview">
         <div class="question"><?php echo $question; ?></div>
         <div class="answer"><?php echo $answer; ?></div>
