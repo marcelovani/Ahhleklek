@@ -374,14 +374,26 @@ header .tagline {
 
 #preview .question {
 	display: block;
-	position: absolute;
-	top: 10px;
-	left: 60px;
+	position: relative;
+	top: 13px;
+	left: 129px;
+	/*border: 1px solid;*/
+	width: 89px;
+	height: 44px;
+	z-index: 100;
+	font-size: 12px;
+	color: black;
 }
 
 #preview .answer {
 	display: block;
-	position: absolute;
-	top: 60px;
-	left: 200px;
+	position: relative;
+	top: -8px;
+	left: 305px;
+	/*border: 1px solid;*/
+	width: 117px;
+	height: 67px;
+	z-index: 100;
+	font-size: 12px;
+	color: black;	
 }

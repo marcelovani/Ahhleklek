@@ -227,12 +227,14 @@ $app_name = idx($app_info, 'name', '');
     </header>
 
     <section id="main">
-      <p>Message 1</p>
-      <p>Message 2</p>
+      <?php $question = "Ta indo aonde"; ?>
+      <?php $answer = "Na casa do caraio"; ?>      
+      <p><?php echo $question; ?></p>
+      <p><?php echo $answer; ?></p>
       <a href="https://devcenter.heroku.com/articles/facebook" target="_top" class="button">Preview</a>
       <div id="preview">
-        <div class="question"></div>
-        <div class="answer"></div>
+        <div class="question"><?php echo $question; ?></div>
+        <div class="answer"><?php echo $answer; ?></div>
       </div>
     </section>
     
