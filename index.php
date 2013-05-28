@@ -41,7 +41,7 @@ $facebook = new Facebook(array(
 ));
 
 $question = "Ta indo aonde?";
-$answer = "Na casa do " . he($name);
+$answer = "Na casa do " . he($name) . "!";
       
 $user_id = $facebook->getUser();
 if ($user_id) {
