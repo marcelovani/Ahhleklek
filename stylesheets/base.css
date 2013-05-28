@@ -420,10 +420,15 @@ header .tagline {
 	vertical-align: middle;	
 }
 
-.button .preview {
+.button.preview {
 	position: relative;
 	right: 10px;
 	float: left;
 	top: -40px;
 	left: 255px;
+}
+
+#share-app {
+	margin: 0 auto;
+	width: 344px;
 }

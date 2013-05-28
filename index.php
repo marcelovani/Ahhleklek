@@ -244,7 +244,7 @@ $app_name = idx($app_info, 'name', '');
     
     <section id="share">
        <div id="share-app">
-          <p>Share your app:</p>
+          <p>Share:</p>
           <ul>
             <li>
               <a href="#" class="facebook-button" id="postToWall" data-url="<?php echo AppInfo::getUrl(); ?>">
@@ -270,8 +270,6 @@ $app_name = idx($app_info, 'name', '');
     ?>
 
     <section id="samples" class="clearfix">
-      <h1>Fun</h1>
-
       <div class="list">
         <h3>Friends using this app</h3>
         <ul class="friends">
