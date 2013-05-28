@@ -213,7 +213,7 @@ $app_name = idx($app_info, 'name', '');
       <p id="picture" style="background-image: url(https://graph.facebook.com/<?php echo he($user_id); ?>/picture?type=normal)"></p>
 
       <div>
-        <h1>Ahh Wellek lek come, <strong><?php echo he(idx($basic, 'name')); ?></strong></h1>
+        <h1>Ahh Wellek lek come 1, <strong><?php echo he(idx($basic, 'name')); ?></strong></h1>
         <p class="tagline">
           This is your app
           <a href="<?php echo he(idx($app_info, 'link'));?>" target="_top"><?php echo he($app_name); ?></a>
@@ -242,14 +242,14 @@ $app_name = idx($app_info, 'name', '');
       </div>
       <?php } else { ?>
       <div>
-        <h1>Welcome</h1>
+        <h1>Ahh Wellek lek come</h1>
         <div class="fb-login-button" data-scope="user_likes,user_photos"></div>
       </div>
       <?php } ?>
     </header>
 
     <section id="get-started">
-      <p>Welcome to your Facebook app, running on <span>heroku</span>!</p>
+      <p>Ahh Wellek lek come to your Facebook app, running on <span>heroku</span>!</p>
       <a href="https://devcenter.heroku.com/articles/facebook" target="_top" class="button">Learn How to Edit This App</a>
     </section>
 
