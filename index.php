@@ -40,6 +40,9 @@ $facebook = new Facebook(array(
   'trustForwarded' => true,
 ));
 
+$question = "Ta indo aonde";
+$answer = "Na casa do caraio";
+      
 $user_id = $facebook->getUser();
 if ($user_id) {
   try {
@@ -227,10 +230,10 @@ $app_name = idx($app_info, 'name', '');
     </header>
 
     <section id="main">
-      <?php $question = "Ta indo aonde"; ?>
-      <?php $answer = "Na casa do caraio"; ?>      
-      <p><?php echo $question; ?></p>
-      <p><?php echo $answer; ?></p>
+      <form>
+        <p>Question: <input type="text" name="question" size="30" max-size="20" value="<?php echo $question; ?>"></p>
+        <p>Answer: <input type="text" name="answer" size="30" max-size="30" value="<?php echo $answer; ?>"></p>
+      </form>
       <a href="https://devcenter.heroku.com/articles/facebook" target="_top" class="button">Preview</a>
       <div id="preview">
         <div class="question"><?php echo $question; ?></div>
