@@ -11,12 +11,13 @@
 // Provides access to app specific values such as your app id and app secret.
 // Defined in 'AppInfo.php'
 require_once('AppInfo.php');
+require_once('image.php');
 
 // Enforce https on production
-if (substr(AppInfo::getUrl(), 0, 8) != 'https://' && $_SERVER['REMOTE_ADDR'] != '127.0.0.1') {
-  header('Location: https://'. $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI']);
-  exit();
-}
+//if (substr(AppInfo::getUrl(), 0, 8) != 'https://' && $_SERVER['REMOTE_ADDR'] != '127.0.0.1') {
+//  header('Location: https://'. $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI']);
+//  exit();
+//}
 
 // This provides access to helper functions defined in 'utils.php'
 require_once('utils.php');
@@ -78,6 +79,18 @@ $app_info = $facebook->api('/'. AppInfo::appID());
 
 $app_name = idx($app_info, 'name', '');
 
+if (isset($_GET) {
+	foreach ($_GET as $key => $value) {
+		$encoded_msgs = $value;
+		$msgs = unserialize(base64_decode($encoded_msgs));
+		if (is_array($msgs)) {
+			$question = clean($msgs[0]);
+			$answer = clean($msgs[1]);
+			$output_file = 'output/' . $encoded_msgs . 'jpg';
+			output_image($question, $answer, $output_file);
+		}
+	}
+}
 $question = "Ta indo aonde?";
 $answer = "Na casa do " . he(idx($basic, 'name')) . "!";
 ?>
