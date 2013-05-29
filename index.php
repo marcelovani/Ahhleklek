@@ -81,8 +81,7 @@ $app_name = idx($app_info, 'name', '');
 
 if (isset($_GET) {
 	foreach ($_GET as $key => $value) {
-		$encoded_msgs = $value;
-		$msgs = unserialize(base64_decode($encoded_msgs));
+		$msgs = explode("++", $value);
 		if (is_array($msgs)) {
 			$question = clean($msgs[0]);
 			$answer = clean($msgs[1]);

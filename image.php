@@ -7,6 +7,10 @@ function clean($var){
 	return $var;
 }
 
+function clean_filename($var) {
+	return str_replace (' ', '-', clean($var));
+}
+
 function output_image($question, $answer, $dest_img, $quality = 5) {
 	//Set the Content Type
 	header('Content-type: image/jpeg');
@@ -15,7 +19,7 @@ function output_image($question, $answer, $dest_img, $quality = 5) {
 	  echo 'file should be displayed directly if the image exists in the folder';
 	
 	} else {
-		$dest_img = base64_encode(serialize(array(clean($question), clean($answer)))));
+		$dest_img = clean_filename($question) . '++' . clean_filename($answer) . 'jpg';
 		
 		// Create Image From Existing File
 		$jpg_image = imagecreatefromjpeg('images/leklek_empty.jpg');
