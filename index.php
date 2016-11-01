@@ -1,5 +1,49 @@
 <?php
 
+// This provides access to helper functions defined in 'utils.php'
+require_once('utils.php');
+
+require_once('image.php');
+
+$question = '';
+$answer = '';
+
+if (isset($_REQUEST['question'])) {
+	$question = clean($_REQUEST['question']);
+}
+if (isset($_REQUEST['answer'])) {
+	$answer = clean($_REQUEST['answer']);
+}
+
+$params = request_path();
+$args = explode('/', $params);
+
+if (is_array($args)) {
+	if ($args[0] == 'thumb') {
+		$params = $args[1];
+	}
+}
+
+if (!empty($params)) {
+   $msgs = explode('_', $params);
+   if (is_array($msgs)) {
+      $question = clean(isset($msgs[0])?$msgs[0]:'');
+      $answer = clean(isset($msgs[1])?$msgs[1]:'');
+   }
+}
+
+$clean_filename = urlencode(clean_filename($question . '_' . $answer));
+$output_file = 'output/' . $clean_filename . '.jpg';
+
+$question = sentence($question);
+$answer = sentence($answer);
+
+if ($args[0] == 'thumb') {
+  output_image($question, $answer, $output_file, 'thumb');	
+}
+
+$app_name = 'Ahh Lek Lek';
+
 /**
  * This sample app is provided to kickstart your experience using Facebook's
  * resources for developers.  This sample app provides examples of several
@@ -11,16 +55,13 @@
 // Provides access to app specific values such as your app id and app secret.
 // Defined in 'AppInfo.php'
 require_once('AppInfo.php');
-require_once('image.php');
+
 
 // Enforce https on production
 //if (substr(AppInfo::getUrl(), 0, 8) != 'https://' && $_SERVER['REMOTE_ADDR'] != '127.0.0.1') {
 //  header('Location: https://'. $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI']);
 //  exit();
 //}
-
-// This provides access to helper functions defined in 'utils.php'
-require_once('utils.php');
 
 
 /*****************************************************************************
@@ -32,16 +73,23 @@ require_once('utils.php');
  *
  ****************************************************************************/
 
-require_once('sdk/src/facebook.php');
+if (file_exists('sdk/src/facebook.php')) {
+    include_once('sdk/src/facebook.php');
+}
 
-$facebook = new Facebook(array(
-  'appId'  => AppInfo::appID(),
-  'secret' => AppInfo::appSecret(),
-  'sharedSession' => true,
-  'trustForwarded' => true,
-));
- 
-$user_id = $facebook->getUser();
+$user_id = 0;
+if (class_exists('Facebook')) {
+	$facebook = new Facebook(array(
+	  'appId'  => AppInfo::appID(),
+	  'secret' => AppInfo::appSecret(),
+	  'sharedSession' => true,
+	  'trustForwarded' => true,
+	));
+	 
+	$user_id = $facebook->getUser();
+}
+
+$basic = array();
 if ($user_id) {
   try {
     // Fetch the viewer's basic information
@@ -74,24 +122,24 @@ if ($user_id) {
   ));
 }
 
-// Fetch the basic info of the app that they are using
-$app_info = $facebook->api('/'. AppInfo::appID());
-
-$app_name = idx($app_info, 'name', '');
-
-if (isset($_GET) {
-	foreach ($_GET as $key => $value) {
-		$msgs = explode("++", $value);
-		if (is_array($msgs)) {
-			$question = clean($msgs[0]);
-			$answer = clean($msgs[1]);
-			$output_file = 'output/' . $encoded_msgs . 'jpg';
-			output_image($question, $answer, $output_file);
-		}
-	}
+if (class_exists('Facebook')) {
+	// Fetch the basic info of the app that they are using
+	$app_info = $facebook->api('/'. AppInfo::appID());
+	
+	$app_name = idx($app_info, 'name', '');
 }
-$question = "Ta indo aonde?";
-$answer = "Na casa do " . he(idx($basic, 'name')) . "!";
+
+if (empty($question)) {
+	$question = "Where are you going?";
+}
+$who = he(idx($basic, 'name'));
+if (empty($who)) {
+	$who = 'you';
+}
+if (empty($answer)) {
+	$answer = "Going to visit " . $who . "!";
+}
+
 ?>
 <!DOCTYPE html>
 <html xmlns:fb="http://ogp.me/ns/fb#" lang="en">
@@ -112,16 +160,19 @@ $answer = "Na casa do " . he(idx($basic, 'name')) . "!";
     <!-- over facebook.  You should fill these tags in with      -->
     <!-- your data.  To learn more about Open Graph, visit       -->
     <!-- 'https://developers.facebook.com/docs/opengraph/'       -->
-    <meta property="og:title" content="<?php echo he($app_name); ?>" />
+    <meta property="og:title" content="<?php echo $question; ?>" />
     <meta property="og:type" content="website" />
-    <meta property="og:url" content="<?php echo AppInfo::getUrl(); ?>" />
-    <meta property="og:image" content="<?php echo AppInfo::getUrl('/logo.png'); ?>" />
-    <meta property="og:site_name" content="<?php echo he($app_name); ?>" />
-    <meta property="og:description" content="My first app" />
-    <meta property="fb:app_id" content="<?php echo AppInfo::appID(); ?>" />
-
+    <meta property="og:url" content="<?php echo AppInfo::getUrl('/' . $clean_filename); ?>" />
+    <meta property="og:image" content="<?php echo AppInfo::getUrl('/thumb/' . $clean_filename); ?>" />
+    <meta property="og:site_name" content="ahhleklek" />
+    <meta property="og:description" content="<?php echo $answer; ?>" />
+    <?php if (class_exists('Facebook')) { ?>
+      <meta property="fb:app_id" content="<?php echo AppInfo::appID(); ?>" />
+    <?php } ?>
+    
     <script type="text/javascript" src="/javascript/jquery-1.7.1.min.js"></script>
     <script type="text/javascript" src="/javascript/app.js"></script>
+	<script type="text/javascript" src="http://static.ak.fbcdn.net/connect.php/js/FB.Share"></script>
 
     <script type="text/javascript">
       function logResponse(response) {
@@ -221,6 +272,7 @@ $answer = "Na casa do " . he(idx($basic, 'name')) . "!";
         js.src = "//connect.facebook.net/en_US/all.js";
         fjs.parentNode.insertBefore(js, fjs);
       }(document, 'script', 'facebook-jssdk'));
+
     </script>
 
     <header class="clearfix">
@@ -242,37 +294,32 @@ $answer = "Na casa do " . he(idx($basic, 'name')) . "!";
     </header>
 
     <section id="main">
-      <form class="form" action="" method="POST">
+      <form class="form" action="<?php echo AppInfo::getUrl(); ?>" method="GET">
         <p>Question: <input type="text" class="question" name="question" size="30" maxlength="30" value="<?php echo $question; ?>"></p>
         <p>Answer: <input type="text" class="answer" name="answer" size="30" maxlength="50" value="<?php echo $answer; ?>"></p>
-        <a href="#" class="button preview">Preview</a>
+        <input class="button preview" type="submit" value="Preview">
       </form>
       
       <div id="preview">
-        <div class="censored"></div>
         <div class="question"><?php echo $question; ?></div>
         <div class="answer"><?php echo $answer; ?></div>
+        <div class="censored"></div>
       </div>
     </section>
     
     <section id="share">
        <div id="share-app">
-          <p>Share:</p>
+          <p>Send to your friends:</p>
           <ul>
             <li>
-              <a href="#" class="facebook-button" id="postToWall" data-url="<?php echo AppInfo::getUrl(); ?>">
-                <span class="plus">Post to Wall</span>
-              </a>
+				<div><a name="fb_share" type="button" share_url="<?php echo AppInfo::getUrl('/' . $clean_filename); ?>"></a></div>
+	        </li>
+            <li>
+            	<div class="fb-login-button" data-show-faces="true" data-width="200" data-max-rows="1"></div>
             </li>
             <li>
-              <a href="#" class="facebook-button speech-bubble" id="sendToFriends" data-url="<?php echo AppInfo::getUrl(); ?>">
-                <span class="speech-bubble">Send Message</span>
-              </a>
-            </li>
-            <li>
-              <a href="#" class="facebook-button apprequests" id="sendRequest" data-message="Test this awesome app">
-                <span class="apprequests">Send Requests</span>
-              </a>
+              <div class="fb-follow" data-href="<?php echo AppInfo::getUrl(); ?>" data-layout="box_count" data-show-faces="true" data-width="450"></div>
+          
             </li>
           </ul>
         </div>
@@ -293,8 +340,8 @@ $answer = "Na casa do " . he(idx($basic, 'name')) . "!";
               $name = idx($auf, 'name');
           ?>
           <li>
-            <a href="https://www.facebook.com/<?php echo he($id); ?>" target="_top">
-              <img src="https://graph.facebook.com/<?php echo he($id) ?>/picture?type=square" alt="<?php echo he($name); ?>">
+            <a href="http://www.facebook.com/<?php echo he($id); ?>" target="_top">
+              <img src="http://graph.facebook.com/<?php echo he($id) ?>/picture?type=square" alt="<?php echo he($name); ?>">
               <?php echo he($name); ?>
             </a>
           </li>
@@ -310,3 +357,4 @@ $answer = "Na casa do " . he(idx($basic, 'name')) . "!";
     ?>
   </body>
 </html>
+

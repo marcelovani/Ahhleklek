@@ -10,7 +10,7 @@ body {
   font: 14px/1.5em "Lucida Grande", Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   width: 720px;
-  margin: 20px;
+  margin: 0 auto;
 }
 
 a:link, a:visited {
@@ -40,6 +40,7 @@ header {
   border-top: 1px solid #b3b3b3;
   font-size: 11px;
   padding: 24px 18px;
+  margin-top: 15px;
 }
 
 header h1 {
@@ -317,16 +318,40 @@ header .tagline {
   zoom: 1;
 }
 
+/**************************************/
 
+header {
+	width: 100%;
+	padding: 0;
+}
 
-#main {
+header div {
+	padding: 24px 24px;
+}
+
+#main,
+#share {
+  display: block;
   border-left: 1px solid #b3b3b3;
   border-right: 1px solid #b3b3b3;
+  width: 100%;
+}
+
+#main {
+    border-top: none;
+    border-bottom: none;
+}
+
+#share {
+    height: 92px;
+    border-top: none;
+    border-bottom: 1px solid #b3b3b3;
 }
 
 #main .form {
 	width: 500px;
 	margin: 0 auto;
+	padding: 10px;
 }
 
 #main .form .question {
@@ -340,28 +365,27 @@ header .tagline {
 }
 
 #preview {
-  background: url("../images/leklek_empty.jpg");
-  border: 1px solid #353d4f;
-  height: 320px;
-  width: 500px;
-  margin: 0 auto;
-  text-align: center;
-  text-shadow: 0 1px 0 rgba(0, 0, 0, .29);
+	background: url("../images/leklek_empty.jpg") no-repeat;
+	height: 320px;
+	width: 500px;
+	margin: 0 auto;
+	position: relative;
 }
 
 #preview .censored {
-  background: url("../images/censored.png");
-  height: 320px;
-  width: 500px;
-  margin: 0 auto;
-  z-index: 200;
-  position: absolute;
+	background: url("../images/censored.png") no-repeat;
+	height: 300px;
+	width: 500px;
+	z-index: 200;
+	position: absolute;
+	top: 0;
+	left: 0;
 }
 
 #preview .question {
 	display: block;
-	position: relative;
-	top: -9px;
+	position: absolute;
+	top: 22px;
 	left: 129px;
 	width: 89px;
 	height: 44px;
@@ -375,8 +399,8 @@ header .tagline {
 
 #preview .answer {
 	display: block;
-	position: relative;
-	top: -8px;
+	position: absolute;
+	top: 42px;
 	left: 299px;
 	width: 117px;
 	height: 67px;
@@ -385,7 +409,7 @@ header .tagline {
 	color: black;
 	line-height: 17px;
 	text-align: center;
-	vertical-align: middle;	
+	vertical-align: middle;
 }
 
 .button.preview {
@@ -401,3 +425,4 @@ header .tagline {
 	width: 344px;
 	float: none!important;
 }
+
